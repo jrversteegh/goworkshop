@@ -6,8 +6,9 @@ import (
 )
 
 func main() {
-	talk("rob")
-	talk("christian")
+	go talk("rob")
+	go talk("christian")
+  time.Sleep(10 * time.Second)
 }
 
 func talk(name string) {
