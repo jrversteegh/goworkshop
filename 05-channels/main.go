@@ -7,15 +7,17 @@ import (
 )
 
 func main() {
-	go talk("rob")
-	go talk("christian")
+  c := make(chan string)
+	go talk("rob", c)
+	go talk("christian", c)
 
 	time.Sleep(10 * time.Second)
 }
 
-func talk(name string) {
+func talk(name string, channel chan string) {
 	for {
-		fmt.Printf("my name is %v\n", name)
+    s := fmt.Sprintf("my name is %v\n", name)
+    channel <- s
 		time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
 	}
 }
